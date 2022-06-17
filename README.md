@@ -39,7 +39,8 @@ Install the dependencies
 ```sh
 - cd propine-interview
 - download data at [https://s3-ap-southeast-1.amazonaws.com/static.propine.com/transactions.csv.zip]
-- move data to src/data
+- move data to src/data folder
+- add CRYPTO_COMPARE_API_KEY to env
 - npm i
 - nom run start
 ```

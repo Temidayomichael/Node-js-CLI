@@ -5,7 +5,6 @@ import { tokenPortfolioValue } from './calculations/tokenPortfolioValue'
 import { portfolioValuePerTokenOnDate } from './calculations/portfolioValuePerTokenOnDate'
 import { tokenPortfolioValueOnDate } from './calculations/tokenPortfolioValueOnDate'
 
-
 program
 	.version('0.0.3')
 	.description('Propine interview')
@@ -16,7 +15,7 @@ program
 		'portfolio value per token (in USD) on [date]',
 	)
 	.option(
-		'-d -t, --dateToken <YYYY-MM-DD> <token>',
+		'-d -t, --date --token <YYYY-MM-DD> <token>',
 		'token portfolio value (in USD) on [date]',
 	)
 	.parse(process.argv)

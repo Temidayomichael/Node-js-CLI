@@ -7,7 +7,6 @@ const csvFilePath = path.resolve(__dirname, '../../src/data/transactions.csv')
 
 // Given a date, return the portfolio value per token in USD on that date
 export function portfolioValuePerTokenOnDate(date: string) {
-	// convert epoch time to date
 	const dateInput = new Date(date)
 
 	const eachTokenBalance: any[] = [{}]
@@ -21,31 +20,32 @@ export function portfolioValuePerTokenOnDate(date: string) {
 
 	fs.createReadStream(csvFilePath)
 		.pipe(csv())
-		.on('data', (data) => {
-			const dateObj = new Date(parseInt(data.timestamp) * 1000)
-			// id date are on same day
-			if (datesAreOnSameDay(dateInput, dateObj)) {
-				const tokenIndex = eachTokenBalance.findIndex(
-					(token) => token.token === data.token,
-				)
-				if (tokenIndex !== -1) {
-					if (data.transaction_type.toString() === 'DEPOSIT') {
-						eachTokenBalance[tokenIndex].amount =
-							parseFloat(eachTokenBalance[tokenIndex].amount) +
-							parseFloat(data.amount)
-					} else if (data.transaction_type === 'WITHDRAWAL') {
-						eachTokenBalance[tokenIndex].amount =
-							parseFloat(eachTokenBalance[tokenIndex].amount) -
-							parseFloat(data.amount)
+        .on('data', (data) => {
+					// convert epoch time to date
+					const dateObj = new Date(parseInt(data.timestamp) * 1000)
+					// id date are on same day
+					if (datesAreOnSameDay(dateInput, dateObj)) {
+						const tokenIndex = eachTokenBalance.findIndex(
+							(token) => token.token === data.token,
+						)
+						if (tokenIndex !== -1) {
+							if (data.transaction_type.toString() === 'DEPOSIT') {
+								eachTokenBalance[tokenIndex].amount =
+									parseFloat(eachTokenBalance[tokenIndex].amount) +
+									parseFloat(data.amount)
+							} else if (data.transaction_type === 'WITHDRAWAL') {
+								eachTokenBalance[tokenIndex].amount =
+									parseFloat(eachTokenBalance[tokenIndex].amount) -
+									parseFloat(data.amount)
+							}
+						} else {
+							eachTokenBalance.push({
+								token: data.token,
+								amount: parseFloat(data.amount),
+							})
+						}
 					}
-				} else {
-					eachTokenBalance.push({
-						token: data.token,
-						amount: parseFloat(data.amount),
-					})
-				}
-			}
-		})
+				})
 		.on('end', async () => {
 			process.stdout.write('Done')
 			process.stdout.write('\nConverting to USD ...')

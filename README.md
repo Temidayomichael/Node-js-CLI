@@ -56,7 +56,6 @@ To run the program
     -p, --portfolio                                 portfolio value per token (in USD)  
     -t, --token <token>                             token portfolio value (in USD)
     -d, --date <YYYY-MM-DD>                         portfolio value per token (in USD) on [date]
-    -d -t, --date --token <YYYY-MM-DD> <token>         token portfolio value (in USD) on [date]  
+    -d -t, --date --token <YYYY-MM-DD> <token>      token portfolio value (in USD) on [date]  
     -h, --help                                      display help for command
-
     ```

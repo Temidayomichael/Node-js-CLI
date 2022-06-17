@@ -20,7 +20,7 @@ Let us assume you are a crypto investor. You have made transactions over a perio
 
 ##### Calculation algorithm
 
-On fetch of each data using createReadStream and parsed to json csv-paser then check if conditions are met then check,add and remove token from balance based on if the transaction type is Deposit or Withdrawl. When all calculation are done, then the currecy is converted to USD usign crypto comapre API besforretrurning to user.
+On fetch of each data using createReadStream and parsed to json csv-paser then check if conditions are met then check,add and remove token from balance based on if the transaction type is Deposit or Withdrawl. When all calculation are done, then the currecy is converted to USD using rates from crypto comapre API then return computed result to the user.
 
 ## Tech
 
